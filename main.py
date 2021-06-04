@@ -42,7 +42,7 @@ class Solution:
         zero_indices = np.argwhere(self.cost_matrix == 0)
 
         new_vertex_id = zero_indices[0]
-        cost = np.inf
+        cost = -1
 
         for zero in zero_indices:
             # Wyodrębnij rząd w którym znajduje się
@@ -56,7 +56,7 @@ class Solution:
             col = np.delete(col, zero[0])
 
             new_cost = np.amin(row) + np.amin(col)
-            if new_cost < cost:
+            if new_cost > cost:
                 cost = new_cost
                 new_vertex_id = zero
 
