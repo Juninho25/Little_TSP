@@ -38,7 +38,31 @@ class Solution:
         return fi
 
     def choose_new_vertex(self):#zwraca obj. klasy NewVertex
-        pass
+        # znajdź indeksy elementów równych zero
+        zero_indices = np.argwhere(self.cost_matrix == 0)
+
+        new_vertex_id = zero_indices[0]
+        cost = np.inf
+
+        for zero in zero_indices:
+            # Wyodrębnij rząd w którym znajduje się
+            # dane zero oraz usuń to zero z otrzymanego wektora
+            row = self.cost_matrix[zero[0], :]
+            row = np.delete(row, zero[1])
+
+            # Wyodrębnij kolumnę w której znajduje się
+            # dane zero oraz usuń to zero z otrzymanego wektora
+            col = self.cost_matrix[:, zero[1]]
+            col = np.delete(col, zero[0])
+
+            new_cost = np.amin(row) + np.amin(col)
+            if new_cost < cost:
+                cost = new_cost
+                new_vertex_id = zero
+
+        return NewVertex(new_vertex_id, cost)
+
+
     def update_cost_matrix(self, cordinates):#dostaje krotke wsp., nic nie zwraca; modyfikuje(zabrania powrotnego przejscia) self.cost_matrix 
         pass
     def get_path():#zwraca listę kolejnych wierzchołków w sciezce korzystając z self.cost_matrix 2x2 i self.path
