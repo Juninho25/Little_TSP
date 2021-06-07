@@ -64,7 +64,22 @@ class Solution:
 
 
     def update_cost_matrix(self, cordinates):#dostaje krotke wsp., nic nie zwraca; modyfikuje(zabrania powrotnego przejscia) self.cost_matrix 
-        pass
+        row_size = np.shape(self.cost_matrix)[0]
+        col_size = np.shape(self.cost_matrix)[1]
+
+        for i in range(row_size):
+          self.cost_matrix[cordinates[0]][i] = inf
+        for j in range(col_size):
+          self.cost_matrix[j][cordinates[1]] = inf
+        
+        self.cost_matrix[cordinates[1]][cordinates[0]] = inf
+
+        for row in range(np.shape(self.cost_matrix)[0]):
+          for col in range(np.shape(self.cost_matrix)[1]):
+            for el in self.path:
+              if col == el[1]:
+                self.cost_matrix[row][col] = inf
+                
     def get_path():#zwraca listę kolejnych wierzchołków w sciezce korzystając z self.cost_matrix 2x2 i self.path
         pass
 
