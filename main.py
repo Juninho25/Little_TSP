@@ -95,7 +95,7 @@ class Solution:
 def get_optimal_cost(optimal_path, m):
     cost = 0
 
-    for idx in range(1, optimal_path.size()):
+    for idx in range(1, len(optimal_path)):
         cost += m[optimal_path[idx - 1]][optimal_path[idx]]
 
     ## Add the cost of returning from the last city to the initial one.
@@ -113,7 +113,7 @@ def get_optimal_cost(optimal_path, m):
  ##
 def create_right_branch_matrix(m, v, lb):
     m = copy.deepcopy(m)
-    m[v.row][v.col] = inf
+    m[v[0]][v[1]] = inf
     return Solution(m, [], lb);
 
 
@@ -160,23 +160,23 @@ def solve_tsp(cm):
                 break
             
             # 3. Get new vertex and the cost of not choosing it.
-            new_vertex = NewVertex(); # @TODO (KROK 2)
-            new_vertex = left_branch.choose_new_vertex();
+            #new_vertex = NewVertex(); # @TODO (KROK 2)
+            new_vertex = left_branch.choose_new_vertex()
             # 4. @TODO Update the path - use append_to_path method.
-            left_branch.path.append((new_vertex.cordinates))
+            left_branch.path.append((new_vertex.coordinates))
             # 5. @TODO (KROK 3) Update the cost matrix of the left branch.
-            left_branch.update_cost_matrix((new_vertex.cordinates));
+            left_branch.update_cost_matrix((new_vertex.coordinates))
             # 6. Update the right branch and push it to the LIFO.
             new_lower_bound = left_branch.lb + new_vertex.cost;
-            lifo.push(create_right_branch_matrix(cm, new_vertex.coordinates,
-                                                      new_lower_bound));
+            lifo.append(create_right_branch_matrix(cm, new_vertex.coordinates,
+                                                      new_lower_bound))
         
 
         if (left_branch.lb <= best_lb):
             # If the new solution is at least as good as the previous one,
             # save its lower bound and its path.
             best_lb = left_branch.lb
-            new_path = left_branch.get_path;
+            new_path = left_branch.get_path()
             end_solutions.append((get_optimal_cost(new_path, cm), new_path));
         
 
