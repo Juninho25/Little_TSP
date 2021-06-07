@@ -154,8 +154,9 @@ def solve_tsp(cm):
             # @TODO (KROK 1)
             new_cost = left_branch.reduce_cost_matrix();
             # 2. Update the lower bound and check the break condition.
-            print("po rekukcji:\n", left_branch.cost_matrix, "\nlb:", new_cost)
-            left_branch.lb = new_cost;
+            
+            left_branch.lb = left_branch.lb + new_cost
+            print("po rekukcji:\n", left_branch.cost_matrix, "\nlb:", left_branch.lb)
             if left_branch.lb > best_lb:
                 break
             
