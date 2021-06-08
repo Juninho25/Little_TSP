@@ -209,11 +209,10 @@ def solve_tsp(cm):
                                                    new_lower_bound, copy.deepcopy(left_branch.path[0:-1])))
             
         if (left_branch.lb <= best_lb):
-            #dodanie rozw do listy rozwiązań całego problemu
-            best_lb = left_branch.lb
-
             new_path = left_branch.get_path()
+            best_lb = get_optimal_cost(new_path, org_cm)
 
+            # dodanie rozw do listy rozwiązań całego problemu
             end_solutions.append((get_optimal_cost(new_path, org_cm), new_path))
 
     #zwrócenie tylko najlepsych rozwiązań
@@ -221,22 +220,22 @@ def solve_tsp(cm):
 
 
 def main():
-#    matrix = np.array([[inf, 10, 8,   19, 12],
-#                      [10, inf, 20,  6,  3],
-#                      [8,   20, inf, 4,  2],
-#                      [19,  6,  4, inf,  7],
-#                      [12,  3,  2,   7, inf]])
+    # matrix = np.array([[inf, 10, 8,   19, 12],
+    #                  [10, inf, 20,  6,  3],
+    #                  [8,   20, inf, 4,  2],
+    #                  [19,  6,  4, inf,  7],
+    #                  [12,  3,  2,   7, inf]])
     matrix = np.array(
-       [[inf, 3, 4, 2, 7, 9, 11, 7, 2, 2],
+       [[inf, 3, 4, 20, 7, 9, 11, 7, 20, 1],
         [3, inf, 4, 6, 2, 3, 2, 3, 4,  5],
         [4, 4, inf, 5, 8, 4, 7, 1, 2,  6],
-        [2, 6, 5, inf, 6, 4, 2, 2, 2,  3],
-        [7, 3, 8, 6, inf, 5, 11, 3, 1, 5],
+        [20, 6, 5, inf, 6, 4, 2, 2, 2,  3],
+        [7, 2, 8, 6, inf, 5, 11, 3, 1, 5],
         [9, 3, 4, 4, 5, inf, 4, 4, 5,  5],
         [11, 2, 7, 2, 11, 4, inf, 4, 4, 3],
-        [7, 3, 1, 2, 3, 4,  4, inf, 5, 7],
-        [2, 4, 2, 2, 1, 5,  4, 5, inf, 2],
-        [2, 5, 6, 3, 5, 5,  3, 7, 2, inf]])
+        [7, 3, 1, 2, 3,  4,  4, inf, 5, 7],
+        [20, 4, 2, 2, 1,  5,  4, 5, inf, 2],
+        [1, 5, 6, 3, 5,  5,  3, 7, 2, inf]])
 
 
     print("Macierz początkowa:\n", matrix, "\n")
