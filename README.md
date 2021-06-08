@@ -4,7 +4,7 @@ Podział:
 
 Adrian Poniatowski - 
 
-Piotr Hudaszek - 
+Piotr Hudaszek - Schemat ogólny(funkcja main), testowanie algorytmu
 
 Wojciech Żyła - 
 
